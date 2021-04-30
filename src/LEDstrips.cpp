@@ -11,14 +11,20 @@ void setupLEDstrips() {
 }
 
 void timeControlLEDstrips(DateTime now) {
-  int timeControl = now.hour() + HOURS_OFFSET;
+  int timeControl = now.minute() + HOURS_OFFSET;
 
-  if ((timeControl >= SUNRISE_TIME) && (timeControl <= SUNSET_TIME)) {
+  if (timeControl == SUNRISE_TIME) {
     sunrise();
+  }
+  if (timeControl == SUNSET_TIME) {
+    sunset();
+  }
+  if ((timeControl >= SUNRISE_TIME) && (timeControl <= SUNSET_TIME)) {
+    day();
   }
 
   if ((timeControl >= SUNSET_TIME) || (timeControl <= SUNRISE_TIME)) {
-    sunset();
+    night();
   }
 }
 
@@ -43,7 +49,6 @@ void sunrise() {
       }
 
     } while (sunLevel <= 255);
-    day();
   }
 }
 
