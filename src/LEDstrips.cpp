@@ -21,9 +21,7 @@ bool timeControlLEDstrips(DateTime now) {
   }
   if ((timeControl >= SUNRISE_TIME) && (timeControl <= SUNSET_TIME)) {
     return dayTime = true;
-  }
-
-  if ((timeControl >= SUNSET_TIME) || (timeControl <= SUNRISE_TIME)) {
+  } else if ((timeControl >= SUNSET_TIME) || (timeControl <= SUNRISE_TIME)) {
     return dayTime = false;
   }
 }
