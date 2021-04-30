@@ -41,7 +41,7 @@ void displaySensorDataOnLCD(SensorData sensorData) {
   lcd.print(sensorData.temperature);
   lcd.print(" C");
   lcd.setCursor(0, 1);
-  lcd.print("Feucht: ");
+  lcd.print("Humid : ");
   lcd.print(sensorData.humidityAsInt);
   lcd.print(" % RH");
 }
@@ -71,7 +71,7 @@ void displaySunsetOnLCD() {
 void displayHumidifierStatusOnLCD(SensorData sensorData) {
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("Feucht: ");
+  lcd.print("Humid : ");
   lcd.print(sensorData.humidityAsInt);
   lcd.print(" % RH");
   lcd.setCursor(0, 1);

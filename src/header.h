@@ -5,11 +5,9 @@
 
 #define HUMIDITY_SETTING 90
 
-#define CHECK_TIME_INTERVAL 1
-
 #define HOURS_OFFSET 1
 
-#define SUN_ITERATION_TIME 50
+#define SUN_ITERATION_TIME 1000
 
 #define DISPLAY_TOGGLE_TIME 10000
 
@@ -42,11 +40,10 @@ void setupHumidifier();
 bool controlHumidifier(SensorData);
 
 void setupLEDstrips();
-void timeControlLEDstrips(DateTime);
+bool timeControlLEDstrips(DateTime);
 void sunrise();
-void day();
 void sunset();
-void night();
+void dayNight(bool);
 
 void setupClock();
 void checkTimeAtInterval();
