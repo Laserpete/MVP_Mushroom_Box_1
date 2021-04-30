@@ -3,7 +3,7 @@
 
 #include "header.h"
 
-long lastDisplayToggle = 0;
+unsigned long lastDisplayToggle = 0;
 bool displayToggle = false;
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
