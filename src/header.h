@@ -30,15 +30,16 @@ void htu21dSensorHeater(SensorData);
 SensorData getSensorData();
 
 void setupLCD();
-void whatToDisplayOnLCD(SensorData, DateTime);
+void whatToDisplayOnLCD(SensorData, DateTime, bool);
 void displaySensorDataOnLCD(SensorData);
 void displayTimeOnLCD(DateTime);
 void displayStatusOnLCD();
 void displaySunriseOnLCD();
 void displaySunsetOnLCD();
+void displayHumidifierStatusOnLCD(SensorData);
 
 void setupHumidifier();
-void controlHumidifier(SensorData);
+bool controlHumidifier(SensorData);
 
 void setupLEDstrips();
 void timeControlLEDstrips(DateTime);

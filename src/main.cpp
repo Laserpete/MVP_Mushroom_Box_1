@@ -16,6 +16,7 @@
 
 #define LOOP_TIME 1000
 unsigned long lastLoop = 0;
+bool humidifierIsOn;
 
 void setup() {
   Serial.begin(9600);
@@ -33,7 +34,7 @@ void loop() {
     DateTime dateTime = getCurrentTimeFromRTC();
 
     timeControlLEDstrips(dateTime);
-    // controlHumidifier(sensorData);
-    whatToDisplayOnLCD(sensorData, dateTime);
+    humidifierIsOn = controlHumidifier(sensorData);
+    whatToDisplayOnLCD(sensorData, dateTime, humidifierIsOn);
   }
 }

@@ -16,15 +16,20 @@ void setupLCD() {
   Serial.println("LCD Active");
 }
 
-void whatToDisplayOnLCD(SensorData sensorData, DateTime time) {
-  if (millis() >= (lastDisplayToggle + DISPLAY_TOGGLE_TIME)) {
-    lastDisplayToggle = millis();
-    displayToggle = !displayToggle;
-  }
-  if (displayToggle == true) {
-    displaySensorDataOnLCD(sensorData);
+void whatToDisplayOnLCD(SensorData sensorData, DateTime time,
+                        bool humidifierIsOn) {
+  if (humidifierIsOn == true) {
+    displayHumidifierStatusOnLCD(sensorData);
   } else {
-    displayTimeOnLCD(time);
+    if (millis() > (lastDisplayToggle + DISPLAY_TOGGLE_TIME)) {
+      lastDisplayToggle = millis();
+      displayToggle = !displayToggle;
+    }
+    if (displayToggle == true) {
+      displaySensorDataOnLCD(sensorData);
+    } else {
+      displayTimeOnLCD(time);
+    }
   }
 }
 
@@ -61,4 +66,14 @@ void displaySunsetOnLCD() {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("    Sunset");
+}
+
+void displayHumidifierStatusOnLCD(SensorData sensorData) {
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Feucht: ");
+  lcd.print(sensorData.humidityAsInt);
+  lcd.print(" % RH");
+  lcd.setCursor(0, 1);
+  lcd.print("Humidifier is On");
 }
