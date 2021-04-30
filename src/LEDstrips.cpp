@@ -2,7 +2,7 @@
 
 #include "header.h"
 
-bool sunHasRisen, sunHasSet = false;
+bool sunHasRisen, sunHasSet, dayTime = false;
 
 void setupLEDstrips() {
   pinMode(LED_STRIP_PIN, OUTPUT);
@@ -10,8 +10,8 @@ void setupLEDstrips() {
   Serial.println("LED strips setup");
 }
 
-void timeControlLEDstrips(DateTime now) {
-  int timeControl = now.minute() + HOURS_OFFSET;
+bool timeControlLEDstrips(DateTime now) {
+  int timeControl = now.hour() + HOURS_OFFSET;
 
   if (timeControl == SUNRISE_TIME) {
     sunrise();
@@ -20,11 +20,11 @@ void timeControlLEDstrips(DateTime now) {
     sunset();
   }
   if ((timeControl >= SUNRISE_TIME) && (timeControl <= SUNSET_TIME)) {
-    day();
+    return dayTime = true;
   }
 
   if ((timeControl >= SUNSET_TIME) || (timeControl <= SUNRISE_TIME)) {
-    night();
+    return dayTime = false;
   }
 }
 
@@ -52,12 +52,6 @@ void sunrise() {
   }
 }
 
-void day() {
-  digitalWrite(LED_STRIP_PIN, HIGH);
-  Serial.println("LED Pin digital write high");
-  Serial.println("It is now day time");
-}
-
 void sunset() {
   sunHasRisen = false;
   int sunLevel = 255;
@@ -78,12 +72,16 @@ void sunset() {
       }
 
     } while (sunLevel >= 1);
-    night();
   }
 }
 
-void night() {
-  digitalWrite(LED_STRIP_PIN, LOW);
-  Serial.println("LED Pin digital write low");
-  Serial.println("It is now night time");
+void dayNight(bool dayTime) {
+  if (dayTime == true) {
+    digitalWrite(LED_STRIP_PIN, HIGH);
+    Serial.println("It is now day time");
+  }
+  if (dayTime == false) {
+    digitalWrite(LED_STRIP_PIN, LOW);
+    Serial.println("It is now night time");
+  }
 }

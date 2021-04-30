@@ -33,7 +33,7 @@ void loop() {
     SensorData sensorData = getSensorData();
     DateTime dateTime = getCurrentTimeFromRTC();
 
-    timeControlLEDstrips(dateTime);
+    dayNight(timeControlLEDstrips(dateTime));
     humidifierIsOn = controlHumidifier(sensorData);
     whatToDisplayOnLCD(sensorData, dateTime, humidifierIsOn);
   }
