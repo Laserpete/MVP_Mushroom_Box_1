@@ -29,6 +29,17 @@ void setup() {
 
 void loop() {
   if (millis() >= (lastLoop + LOOP_TIME)) {
+    // Bind snip tool to key to prove that PC is better than mac
+
+    // State machine image on discord chat with Tim
+
+    // Implement noblocking sunrise & sunset
+    // int brightness = getSunBrightness(time, lastTimeChanged,
+    // currentSunBrightness); setBrightness(brightness)
+
+    // Should I start the sunrise?
+    // If it is started, andf it is time, call sunrise and increment
+    // sunrise(getSunState());
     lastLoop = millis();
     SensorData sensorData = getSensorData();
     DateTime dateTime = getCurrentTimeFromRTC();
