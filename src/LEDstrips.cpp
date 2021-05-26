@@ -41,12 +41,12 @@ int getSunBrightness(DateTime now) {
       return 0;
     }
   } else if ((now.hour() < determineSunriseTime()) or
-             (now.minute() > determineSunsetTime())) {
+             (now.hour() > determineSunsetTime())) {
     Serial.println("Night Time");
     currentBrightness = 0;
     return currentBrightness;
   } else if ((now.hour() > determineSunriseTime()) and
-             (now.minute() < determineSunsetTime())) {
+             (now.hour() < determineSunsetTime())) {
     Serial.println("Day Time");
     currentBrightness = MAXIMUM_LIGHT_LEVEL_PWM;
     return currentBrightness;
