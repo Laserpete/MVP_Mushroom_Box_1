@@ -12,8 +12,8 @@ void setupLCD() {
   lcd.init();  // initialize the lcd
   lcd.backlight();
   lcd.setCursor(0, 0);
-  lcd.print("Hello Mushrooms");
-  Serial.println("LCD Active");
+  lcd.print("Hallo Pilze");
+  Serial.println("LCD Aktiv");
 }
 
 void whatToDisplayOnLCD(SensorData sensorData, DateTime time,
@@ -41,39 +41,48 @@ void displaySensorDataOnLCD(SensorData sensorData) {
   lcd.print(sensorData.temperature);
   lcd.print(" C");
   lcd.setCursor(0, 1);
-  lcd.print("Humid : ");
+  lcd.print("Feucht : ");
   lcd.print(sensorData.humidityAsInt);
-  lcd.print(" % RH");
+  lcd.print(" % rF");
 }
 
 void displayTimeOnLCD(DateTime time) {
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("Time : ");
+  lcd.print("Zeit : ");
+  if (time.hour() < 10) {
+    lcd.print("0");
+  }
   lcd.print(time.hour() + HOURS_OFFSET);
   lcd.print(":");
+  if (time.minute() < 10) {
+    lcd.print("0");
+  }
   lcd.print(time.minute());
   lcd.print(":");
+  if (time.second() < 10) {
+    lcd.print("0");
+  }
   lcd.print(time.second());
 }
 
 void displaySunriseOnLCD() {
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("    Sunrise");
+  lcd.print("Sonnenaufgang");
 }
 void displaySunsetOnLCD() {
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("    Sunset");
+  lcd.print("Sonnenuntergang");
 }
 
 void displayHumidifierStatusOnLCD(SensorData sensorData) {
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("Humid : ");
+  lcd.print("Feucht : ");
   lcd.print(sensorData.humidityAsInt);
   lcd.print(" % RH");
   lcd.setCursor(0, 1);
-  lcd.print("Humidifier is On");
+  lcd.print("Vernebler ist ein");
 }
